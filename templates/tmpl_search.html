@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>{{ title }}</title>
+    <style type="text/css">
+    body.awr {font:bold 10pt Arial,Helvetica,Geneva,sans-serif;color:black; background:White;}
+    pre.awr  {font:8pt Courier;color:black; background:White;}
+    h1.awr   {font:bold 20pt Arial,Helvetica,Geneva,sans-serif;color:#336699;margin-top:0pt; margin-bottom:0pt;padding:0px 0px 0px 0px;}
+    h2.awr   {font:bold 18pt Arial,Helvetica,Geneva,sans-serif;color:#336699;margin-top:4pt; margin-bottom:0pt;}
+    h3.awr {font:bold 16pt Arial,Helvetica,Geneva,sans-serif;color:#336699;margin-top:4pt; margin-bottom:0pt;}
+    li.awr {font: 8pt Arial,Helvetica,Geneva,sans-serif; color:black; background:White;}
+    th.awrnobg {font:bold 8pt Arial,Helvetica,Geneva,sans-serif; color:black; background:White;padding-left:4px; padding-right:4px;padding-bottom:2px}
+    th.awrbg {font:bold 8pt Arial,Helvetica,Geneva,sans-serif; color:White; background:#0066CC;padding-left:4px; padding-right:4px;padding-bottom:2px}
+    td.awrnc {font:8pt Arial,Helvetica,Geneva,sans-serif;color:black;background:White;vertical-align:top;}
+    td.awrc    {font:8pt Arial,Helvetica,Geneva,sans-serif;color:black;background:#FFFFCC; vertical-align:top;}
+    td.awrnclb {font:8pt Arial,Helvetica,Geneva,sans-serif;color:black;background:White;vertical-align:top;border-left: thin solid black;}
+    td.awrncbb {font:8pt Arial,Helvetica,Geneva,sans-serif;color:black;background:White;vertical-align:top;border-left: thin solid black;border-right: thin solid black;}
+    td.awrncrb {font:8pt Arial,Helvetica,Geneva,sans-serif;color:black;background:White;vertical-align:top;border-right: thin solid black;}
+    td.awrcrb    {font:8pt Arial,Helvetica,Geneva,sans-serif;color:black;background:#FFFFCC; vertical-align:top;border-right: thin solid black;}
+    td.awrclb    {font:8pt Arial,Helvetica,Geneva,sans-serif;color:black;background:#FFFFCC; vertical-align:top;border-left: thin solid black;}
+    td.awrcbb    {font:8pt Arial,Helvetica,Geneva,sans-serif;color:black;background:#FFFFCC; vertical-align:top;border-left: thin solid black;border-right: thin solid black;}
+    a.awr {font:bold 8pt Arial,Helvetica,sans-serif;color:#663300; vertical-align:top;margin-top:0pt; margin-bottom:0pt;}
+    td.awrnct {font:8pt Arial,Helvetica,Geneva,sans-serif;border-top: thin solid black;color:black;background:White;vertical-align:top;}
+    td.awrct   {font:8pt Arial,Helvetica,Geneva,sans-serif;border-top: thin solid black;color:black;background:#FFFFCC; vertical-align:top;}
+    td.awrc  {font:8pt Arial,Helvetica,Geneva,sans-serif;color:black;background:White;vertical-align:top;border-top: thin solid black;border-left: thin solid black;}
+    td.awrncbbt  {font:8pt Arial,Helvetica,Geneva,sans-serif;color:black;background:White;vertical-align:top;border-left: thin solid black;border-right: thin solid black;border-top: thin solid black;}
+    td.awrncrbt {font:8pt Arial,Helvetica,Geneva,sans-serif;color:black;background:White;vertical-align:top;border-top: thin solid black;border-right: thin solid black;}
+    td.awrcrbt     {font:8pt Arial,Helvetica,Geneva,sans-serif;color:black;background:#FFFFCC; vertical-align:top;border-top: thin solid black;border-right: thin solid black;}
+    td.awrclbt     {font:8pt Arial,Helvetica,Geneva,sans-serif;color:black;background:#FFFFCC; vertical-align:top;border-top: thin solid black;border-left: thin solid black;}
+    td.awrcbbt   {font:8pt Arial,Helvetica,Geneva,sans-serif;color:black;background:#FFFFCC; vertical-align:top;border-top: thin solid black;border-left: thin solid black;border-right: thin solid black;}
+    table.tdiff {  border_collapse: collapse; }
+    .hidden   {position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;}
+    .pad   {margin-left:17px;}
+    .doublepad {margin-left:34px;}
+
+    td.my_awrnc {font:8pt Arial,Helvetica,Geneva,sans-serif;border-top: thin solid gray;border-left: thin solid gray;color:black;background:White;vertical-align:top;}
+    td.wr {word-wrap:break-word;word-break:break-all;}
+    </style>
+</head>
+<body class="awr" >
+    <h1 class="awr" id="top" >{{ title }}</h1>
+    <p>By DJun&nbsp;&nbsp;({{ ver }},&nbsp;{{ update_date }})</p>
+    {%- for table in data -%}
+    <table border="0" class="tdiff" >
+        {%- for line in table.content -%}
+            <tr>
+                {%- if loop.first -%}
+                    {%- for col in line -%}
+                        {%- if loop.first -%}
+                            <th class="awrbg" scope="col" width="4%" >{{ (col or '') | safe }}</th>
+                        {%- else -%}
+                            <th class="awrbg" scope="col" width="10%" >{{ (col or '') | safe }}</th>
+                        {%- endif -%}
+                    {%- endfor -%}
+                {%- else -%}
+                    {%- for col in line -%}
+                        {%- if loop.first -%}
+                            <td scope="row" class="my_awrnc wr" style=" text-align:center" >{{ (col or '') | safe }}</td>
+                        {%- else -%}
+                            <td scope="row" class="my_awrnc wr" >{{ (col or '') | safe }}</td>
+                        {%- endif -%}
+                    {%- endfor -%}
+                {%- endif -%}
+            </tr>
+        {%- endfor -%}
+    </table>
+    <a class="awr" href="#top">返回顶部</a>
+    <br />
+    {%- endfor -%}
+</body>
+</html>
